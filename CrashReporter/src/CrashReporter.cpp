@@ -44,7 +44,7 @@ LONG ExceptCallBack(EXCEPTION_POINTERS *pExcPointer)
 	return EXCEPTION_EXECUTE_HANDLER;
 }
 
-void CrashReporter::RegUnhandleException(std::function<void()> tUserCall)
+void CrashReporter::RegUnhandleException()
 {
 	SetUnhandledExceptionFilter(ExceptCallBack);
 }
