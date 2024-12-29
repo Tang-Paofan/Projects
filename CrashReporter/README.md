@@ -1,8 +1,7 @@
 
 - v0.1.0.0
       - 更新内容：新增CrashReporter
-      - 效果：
-      - ![alt text](image.png)
+      - 效果：![alt text](./image/image.png)
       - 耗时：
       - 精度：
       - 内存：
