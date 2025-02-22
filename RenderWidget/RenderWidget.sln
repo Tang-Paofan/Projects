@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderWidget", "RenderWidget\RenderWidget.vcxproj", "{0BE27289-199B-4DB9-A562-1BFEA799C24F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonUtils", "CommonUtils\CommonUtils.vcxproj", "{FA12EC82-F2F4-486A-8F61-C591BC9EFFE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BE27289-199B-4DB9-A562-1BFEA799C24F}.Debug|x64.ActiveCfg = Release|x64
+		{0BE27289-199B-4DB9-A562-1BFEA799C24F}.Debug|x86.ActiveCfg = Release|x64
+		{0BE27289-199B-4DB9-A562-1BFEA799C24F}.Release|x64.ActiveCfg = Release|x64
+		{0BE27289-199B-4DB9-A562-1BFEA799C24F}.Release|x64.Build.0 = Release|x64
+		{0BE27289-199B-4DB9-A562-1BFEA799C24F}.Release|x86.ActiveCfg = Release|x64
+		{0BE27289-199B-4DB9-A562-1BFEA799C24F}.Release|x86.Build.0 = Release|x64
+		{FA12EC82-F2F4-486A-8F61-C591BC9EFFE6}.Debug|x64.ActiveCfg = Release|x64
+		{FA12EC82-F2F4-486A-8F61-C591BC9EFFE6}.Debug|x86.ActiveCfg = Release|x64
+		{FA12EC82-F2F4-486A-8F61-C591BC9EFFE6}.Release|x64.ActiveCfg = Release|x64
+		{FA12EC82-F2F4-486A-8F61-C591BC9EFFE6}.Release|x64.Build.0 = Release|x64
+		{FA12EC82-F2F4-486A-8F61-C591BC9EFFE6}.Release|x86.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4861541-7A38-4E66-BEDE-4A09D95D7373}
+	EndGlobalSection
+EndGlobal
