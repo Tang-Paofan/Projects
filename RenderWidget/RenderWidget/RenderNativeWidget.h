@@ -21,6 +21,7 @@ public:
 	void render() const;
 
 	void loadPointCloud(const std::wstring& _path);
+	void loadStlMesh(const std::wstring& _path);
 
 	void setThroughSelect(bool val);
 

@@ -17,6 +17,7 @@ public:
 	RenderNativeWidget* pRenderWidget_;
 
 	QPushButton* pLoadPointCloudBtn_;
+	QPushButton* pLoadStlMeshBtn_;
 	QCheckBox* pThroughSelectBtn_;
 };
 
@@ -31,9 +32,11 @@ MainWidget::Impl::Impl()
 	tLay->setContentsMargins(0, 0, 0, 0);
 
 	pLoadPointCloudBtn_ = new QPushButton(u8"加载点云");
+	pLoadStlMeshBtn_ = new QPushButton(u8"加载stl");
 	pThroughSelectBtn_ = new QCheckBox(u8"贯通选区");
 
 	tLay->addWidget(pLoadPointCloudBtn_);
+	tLay->addWidget(pLoadStlMeshBtn_);
 	tLay->addWidget(pThroughSelectBtn_);
 	tLay->addStretch();
 }
@@ -48,6 +51,7 @@ MainWidget::MainWidget(QWidget* parent /*= nullptr*/)
 	tLay->addWidget(impl_->pRenderWidget_);
 
 	QObject::connect(impl_->pLoadPointCloudBtn_, &QPushButton::clicked, this, &MainWidget::loadPointCloud);
+	QObject::connect(impl_->pLoadStlMeshBtn_, &QPushButton::clicked, this, &MainWidget::loadStlMesh);
 	QObject::connect(impl_->pThroughSelectBtn_, &QCheckBox::stateChanged, this, &MainWidget::slotpThroughSelectCheck);
 
 	impl_->pThroughSelectBtn_->setCheckState(Qt::Checked);
@@ -71,6 +75,17 @@ void MainWidget::loadPointCloud()
 		return;
 	}
 	impl_->pRenderWidget_->loadPointCloud(tFilePath.toStdWString());
+}
+
+void MainWidget::loadStlMesh()
+{
+	auto tFilePath = QFileDialog::getOpenFileName(this, "Open Point Cloud File", u8"D:/其他/公司/云甲/文件");
+	if (tFilePath.isEmpty())
+	{
+		return;
+	}
+
+	impl_->pRenderWidget_->loadStlMesh(tFilePath.toStdWString());
 }
 
 void MainWidget::slotpThroughSelectCheck(int val)

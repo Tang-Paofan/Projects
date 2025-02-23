@@ -12,6 +12,7 @@ public:
 
 private slots:
 	void loadPointCloud();
+	void loadStlMesh();
 	void slotpThroughSelectCheck(int val);
 private:
 	class Impl;

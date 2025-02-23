@@ -11,8 +11,10 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkUnsignedCharArray.h>
 #include <vtkPointData.h>
+#include <vtkSTLReader.h>
 
 #include <QtGui/QMouseEvent>
+#include <QtCore/QString>
 
 #include "CommonUtils/ReadPointCloud.h"
 
@@ -99,6 +101,18 @@ void RenderNativeWidget::loadPointCloud(const std::wstring& _path)
 	pMapper_->SetInputConnection(tFilter->GetOutputPort());
 
 	pStyle_->setPointCloud(tPolyData);
+
+	pRender_->ResetCamera();
+	render();
+}
+
+void RenderNativeWidget::loadStlMesh(const std::wstring& _path)
+{
+	auto tRender = vtkSmartPointer<vtkSTLReader>::New();
+	auto tStr = QString::fromStdWString(_path);
+	tRender->SetFileName(tStr.toStdString().data());
+
+	pMapper_->SetInputConnection(tRender->GetOutputPort());
 
 	pRender_->ResetCamera();
 	render();

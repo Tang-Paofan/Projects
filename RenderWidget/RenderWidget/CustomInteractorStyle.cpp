@@ -22,6 +22,8 @@
 #include <vtkDataArray.h>
 #include <vtkFrustumSource.h>
 #include <vtkPolyDataMapper.h>
+#include <vtkExtractSelectedFrustum.h>
+#include <vtkProperty.h>
 
 vtkStandardNewMacro(CustomInteractorStyle)
 
@@ -305,6 +307,7 @@ void CustomInteractorStyle::performPointThroughSelection()
 	vtkSmartPointer<vtkPlanes> frustum = vtkSmartPointer<vtkPlanes>::New();
 	frustum = areaPicker->GetFrustum();
 
+#if 1
 	// 遍历点云，判断点是否在视锥体内
 	vtkPoints* points = pPointCloud_->GetPoints();
 	vtkUnsignedCharArray* colors = vtkUnsignedCharArray::SafeDownCast(
@@ -324,5 +327,24 @@ void CustomInteractorStyle::performPointThroughSelection()
 	}
 
 	pPointCloud_->Modified(); // 通知数据已更新
+#else
+	// TODO 过滤后点数量为0
+	auto extractFilter = vtkSmartPointer<vtkExtractSelectedFrustum>::New();
+	extractFilter->SetInputData(pPointCloud_);
+	extractFilter->SetFrustum(frustum);
+
+	// 步骤 4: 执行过滤操作
+	extractFilter->Update();
+
+	auto p = extractFilter->GetOutput();
+
+	auto tFilterMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+	tFilterMapper->SetInputConnection(extractFilter->GetOutputPort());
+
+	auto tFilterActor = vtkSmartPointer<vtkActor>::New();
+	tFilterActor->GetProperty()->SetColor(0.5, 0.2, 1);
+
+	CurrentRenderer->AddViewProp(tFilterActor);
+#endif
 }
 
