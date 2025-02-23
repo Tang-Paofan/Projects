@@ -22,9 +22,12 @@ public:
 
 	void setPointCloud(vtkSmartPointer<vtkPolyData> _cloud);
 
+	void setThroughSelect(bool val);
+
 private:
 	void setPositionToVector(Eigen::Vector2i& _pos, const int* const _d);
 	void drawSelectionBox();
+	void performPointThroughSelection();
 	void performPointSelection();
 
 private:
@@ -36,5 +39,7 @@ private:
 
 	bool mIsSelect_ = false;
 	vtkSmartPointer<vtkActor2D> pSelectionBoxActor_;
+
+	bool mThroughSelect_ = false;
 };
 

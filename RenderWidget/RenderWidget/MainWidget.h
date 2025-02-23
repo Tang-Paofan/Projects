@@ -12,7 +12,7 @@ public:
 
 private slots:
 	void loadPointCloud();
-
+	void slotpThroughSelectCheck(int val);
 private:
 	class Impl;
 	std::unique_ptr<Impl> impl_;

@@ -8,6 +8,8 @@ class vtkActor;
 class vtkPolyDataMapper;
 class CustomInteractorStyle;
 
+class QMouseEvent;
+
 class RenderNativeWidget : public QVTKOpenGLNativeWidget
 {
 public:
@@ -19,6 +21,12 @@ public:
 	void render() const;
 
 	void loadPointCloud(const std::wstring& _path);
+
+	void setThroughSelect(bool val);
+
+//protected:
+//	void mousePressEvent(QMouseEvent* event) override;
+//	void mouseMoveEvent(QMouseEvent* event) override;
 
 private:
 	vtkSmartPointer<vtkGenericOpenGLRenderWindow> pRenderWidget_;

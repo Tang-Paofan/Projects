@@ -12,6 +12,8 @@
 #include <vtkUnsignedCharArray.h>
 #include <vtkPointData.h>
 
+#include <QtGui/QMouseEvent>
+
 #include "CommonUtils/ReadPointCloud.h"
 
 class RenderNativeWidget::Impl
@@ -46,11 +48,11 @@ RenderNativeWidget::RenderNativeWidget(QWidget* parent /*= nullptr*/)
 	pMapper_ = vtkSmartPointer<vtkPolyDataMapper>::New();
 	pActor_->SetMapper(pMapper_);
 
-	pInteractor_ = vtkSmartPointer<vtkRenderWindowInteractor>::New();
+	pInteractor_ = pRenderWidget_->GetInteractor();
 	//pRenderWidget_->SetInteractor(pInteractor_);
 
 	pStyle_ = vtkSmartPointer<CustomInteractorStyle>::New();
-	pRenderWidget_->GetInteractor()->SetInteractorStyle(pStyle_);
+	pInteractor_->SetInteractorStyle(pStyle_);
 
 	pRenderWidget_->Render();
 }
@@ -61,6 +63,8 @@ RenderNativeWidget::~RenderNativeWidget()
 
 void RenderNativeWidget::active() const
 {
+	//pRenderWidget_->GetInteractor()->Initialize();
+	//pRenderWidget_->GetInteractor()->Start();
 	//pInteractor_->Initialize();
 	//pInteractor_->Start();
 }
@@ -99,3 +103,38 @@ void RenderNativeWidget::loadPointCloud(const std::wstring& _path)
 	pRender_->ResetCamera();
 	render();
 }
+
+void RenderNativeWidget::setThroughSelect(bool val)
+{
+	pStyle_->setThroughSelect(val);
+}
+
+/*
+void RenderNativeWidget::mousePressEvent(QMouseEvent* event)
+{
+	//if (event->modifiers() & Qt::ControlModifier)
+	//{
+	//	event->accept();
+	//}
+	//else
+	//{
+	//	QVTKOpenGLNativeWidget::mousePressEvent(event);
+
+	//}
+	QVTKOpenGLNativeWidget::mousePressEvent(event);
+}
+
+void RenderNativeWidget::mouseMoveEvent(QMouseEvent* event)
+{
+	if (event->modifiers() & Qt::ControlModifier)
+	{
+		event->accept();
+	}
+	else
+	{
+		QVTKOpenGLNativeWidget::mouseMoveEvent(event);
+
+	}
+	QVTKOpenGLNativeWidget::mouseMoveEvent(event);
+}
+*/
