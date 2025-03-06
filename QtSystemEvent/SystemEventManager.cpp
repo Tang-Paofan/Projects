@@ -6,10 +6,6 @@
 class SystemEventManager::Impl
 {
 public:
-    Impl() = default;
-    ~Impl() = default;
-
-public:
     std::unordered_map<QEvent::Type, std::set<QObject *>> mSystemEventMap_;
 };
 
@@ -35,24 +31,24 @@ SystemEventManager *SystemEventManager::getInstance()
 
 void SystemEventManager::postEvent(const SystemEvent &customEvent)
 {
-    auto it = impl_->mSystemEventMap_.find(customEvent.mEventType_);
+    auto it = impl_->mSystemEventMap_.find(customEvent.type());
     if (it != impl_->mSystemEventMap_.end())
     {
         for (const auto &obj : it->second)
         {
-            qApp->postEvent(obj, new QEvent(it->first));
+            qApp->postEvent(obj, new SystemEvent(customEvent));
         }
     }
 }
 
 void SystemEventManager::sendEvent(const SystemEvent &customEvent)
 {
-    auto it = impl_->mSystemEventMap_.find(customEvent.mEventType_);
+    auto it = impl_->mSystemEventMap_.find(customEvent.type());
     if (it != impl_->mSystemEventMap_.end())
     {
         for (const auto &obj : it->second)
         {
-            qApp->sendEvent(obj, new QEvent(it->first));
+            qApp->sendEvent(obj, new SystemEvent(customEvent));
         }
     }
 }

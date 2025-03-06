@@ -2,18 +2,20 @@
 
 #include "SystemEventHandler.h"
 #include <QEvent>
+#include <memory>
 
+/// @brief 事件管理-事件注册、派发
 class SystemEventManager
 {
 public:
-    static SystemEventManager* getInstance();
+    static SystemEventManager *getInstance();
 
 public:
-    void addSytemEvent(QEvent::Type event, QObject* obj);
+    void addSytemEvent(QEvent::Type event, QObject *obj);
 
-    void postEvent(const SystemEvent& customEvent);
+    void postEvent(const SystemEvent &customEvent);
 
-    void sendEvent(const SystemEvent& customEvent);
+    void sendEvent(const SystemEvent &customEvent);
 
 private:
     explicit SystemEventManager();

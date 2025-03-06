@@ -6,31 +6,37 @@
 #include <QEvent>
 #include <QVariant>
 #include <QDebug>
-#include <memory>
 
-struct SystemEvent
+/// @brief 自定义事件，带参数
+struct SystemEvent : public QEvent
 {
     SystemEvent(QEvent::Type _type, QVariant _des)
-        : mEventType_(_type), mDes_(_des)
+        : QEvent(_type), mData(_des)
     {
     }
 
-    QEvent::Type mEventType_;
-    QVariant mDes_;
+    QVariant mData;
 };
 
+/// @brief 事件处理-中间层
 class SystemEventHandler : public QObject
 {
 public:
-    bool event(QEvent *event) override
+    bool eventFilter(QObject *watched, QEvent *event) override
     {
-        if (event->type() == SystemEventType::SYS_TEST)
-        {
-            qDebug() << "SystemEventHandler event" << "SYS_TEST";
-        }
         if (event->type() == SystemEventType::SYS_ENABLE)
         {
-            qDebug() << "SystemEventHandler event" << "SYS_ENABLE";
+            qDebug() << "SystemEventHandler event" << "SYS_ENABLE" << "eventFilter";
+        }
+
+        return QObject::eventFilter(watched, event);
+    }
+
+    bool event(QEvent *event) override
+    {
+        if (event->type() == SystemEventType::SYS_ENABLE)
+        {
+            qDebug() << "SystemEventHandler event" << "SYS_ENABLE" << "event";
         }
 
         return QObject::event(event);
